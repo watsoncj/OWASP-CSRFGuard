@@ -350,7 +350,9 @@
 		var xhr = window.XMLHttpRequest ? new window.XMLHttpRequest : new window.ActiveXObject("Microsoft.XMLHTTP");
 		var pageTokens = {};
 		
-		xhr.open("POST", "%SERVLET_PATH%", false);
+    // use timestamp to prevent IE6 from delivering the cached GET response
+    var timestamp = new Date().getTime();
+    xhr.open("POST", "%SERVLET_PATH%?_=" + timestamp, false);
 		xhr.send(null);
 		
 		var text = xhr.responseText;
